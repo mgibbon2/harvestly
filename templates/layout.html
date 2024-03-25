@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        {% load static %}
+        <title> {% block title %}{% endblock %} </title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+        <!-- Favicon -->
+        <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+        <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+
+        <!-- Font -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter">
+
+        <!-- Bootstrap css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+        <!-- Bootstrap js (and dependencies) -->
+        <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+        <script src="{% static 'js/popper.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    </head>
+
+    <body>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-md navbar-light harvestly-navbar">
+            <a class="navbar-brand home-navbar-brand" href="{% url 'index' %}">
+                <img class="home-logo" src="{% static 'img/logo.png' %}" alt="Harvestly" />
+                <h3 class="home-text"> Harvestly </h3>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#harvestlyNavBarCollapse"
+                aria-controls="harvestlyNavBarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="harvestlyNavBarCollapse">
+                <ul class="navbar-nav ml-auto harvestly-nav">
+                    <li>
+                        <a href="{% url 'events' %}" class="harvestly-nav-link">Markets</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'products' %}" class="harvestly-nav-link">Products</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'about' %}" class="harvestly-nav-link">About Us</a>
+                    </li>
+                    {% if not user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'signup' %}" class="harvestly-nav-link">Sign Up</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'login' %}" class="harvestly-nav-link">Login</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{% url 'logout' %}" class="harvestly-nav-link">Logout</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'profile' %}" class="harvestly-nav-link">Profile</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'cart' %}" class="harvestly-nav-link">Cart</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Page  -->
+        <main class="content">
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <a class="harvestly-nav-link" href="https://github.com/SamuelAdamson">Samuel ↱</a>
+                    </div>
+                    <div class="row">
+                        <a class="harvestly-nav-link" href="https://github.com/veckertUCCS">Victor ↱</a>
+                    </div>
+                    <div class="row">
+                        <a class="harvestly-nav-link" href="https://github.com/kshry">Keegan ↱</a>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <a class="harvestly-nav-link" href="https://github.com/mgibbon2">Matthew ↱</a>
+                    </div>
+                    <div class="row">
+                        <a class="harvestly-nav-link" href="https://github.com/jesroberts101">Jesse ↱</a>
+                    </div>
+                    <div class="row">
+                        <a class="harvestly-nav-link" href="https://github.com/eander17">Evan ↱</a>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <a class="harvestly-nav-link" href="https://uccs.edu">UCCS ↱</a>
+                    </div>
+                    <div class="row">
+                        <a class="harvestly-nav-link" href="https://eas.uccs.edu/">EAS ↱</a>
+                    </div>
+                    <div class="row">
+                        <a class="harvestly-nav-link" href="https://coloradosprings.gov/">COS ↱</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

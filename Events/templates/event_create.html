@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %}Create Market{% endblock %}
+
+{% block content %}
+<div>
+    <h3 class="subtitle"> Add New Market </h3>
+    {% if form.errors %}
+        {% include "form_errors.html" with error_items=form.errors.items %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="row pt-4 mb-2">
+            <div class="col-md-6 harvestly-form-item">
+                {{ form.name.label }}
+                {{ form.name }}
+            </div>
+            <div class="col-md-6 harvestly-form-item">
+                {{ form.location.label }}
+                {{ form.location }}
+            </div>
+            <div class="col-md-6 harvestly-form-item">
+                {{ form.start_time.label }}
+                {{ form.start_time }}
+            </div>
+            <div class="col-md-6 harvestly-form-item">
+                {{ form.end_time.label }}
+                {{ form.end_time }}
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <a class="harvestly-nav-btn-secondary d-flex justify-content-center align-items-center mr-2" href="{% url 'events' %}">Cancel</a>
+            <input class="harvestly-nav-btn-primary" type="submit" value="Add Market" />
+        </div>
+
+        
+    </form>
+
+    {% load static %}
+    <script>let google_maps_api_key = "{{ google_maps_api_key|safe }}";</script>
+    <script src="{% static 'js/googleMapsForm.js' %}"></script>
+</div>
+{% endblock %}

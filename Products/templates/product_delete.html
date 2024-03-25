@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block title %}Delete {{ product.name|title }}{% endblock %}
+
+{% load static %}
+{% block content %}
+<div>
+    <h3 class="subtitle">{{ product.name|title }}</h3>
+    <form method="post">
+        {% csrf_token %}
+        <div class="row mt-4 mb-5">
+            <!-- ImageSection -->
+            <div class="col-md-6 mb-2">
+                {% include "_product_image.html" %}
+            </div>
+            <div class="col-md-6 align-self-center">
+                <h3>Delete {{ product.name|title }}</h3>
+                <h5>{{ product.description }}</h5>
+                <h5 class="mt-5 mb-3">${{ product.price|floatformat:"2" }}</h5>
+                <div class="d-flex text-muted justify-content-between">
+                    <h5>Quantity</h5>
+                    <h5>
+                        <i class="bi-server"></i>
+                        {{ product.quantity }}
+                    </h5>
+                </div>
+                <div class="d-flex text-muted justify-content-between">
+                    <h5>Reserved</h5>
+                    <h5 class="{% if product.get_reservation_count >= product.quantity %}text-danger{% endif %}">
+                        <i class="bi-person-x"></i>
+                        {{ product.get_reservation_count }}
+                    </h5>
+                </div>
+                <!-- Form Submission Section -->
+                <div class="d-flex justify-content-end mt-5 pt-4">
+                    <a
+                        href="{% url 'product-details' product.id %}"
+                        class="harvestly-nav-btn-secondary  d-flex justify-content-center align-items-center mr-2 py-2"
+                    >
+                        <h4 class="m-0">Cancel</h4>
+                    </a>
+                    <button class="harvestly-nav-btn-danger px-3" type="submit">
+                        <h4 class="m-0">
+                            <i class="bi-exclamation-diamond-fill"></i>
+                            Delete
+                        </h4>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+{%endblock %}

@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block title %}Delete {{ event.name|title }}{% endblock %}
+
+{% block content %}
+<div>
+    <h3 class="subtitle">Delete {{ event.name|title }}</h3>
+    <form method="post">
+        {% csrf_token %}
+        <div class="row mt-4 mb-5">
+            <div class="col-md-6 mb-2">
+                <!-- Google Maps Display -->
+                <div class="rounded harvestly-map-display" id="harvestly-map"></div>
+            </div>
+            <div class="col-md-6 align-self-center">
+                <h3>{{ event.name|title }} Details</h3>
+                <h5>{{ event.location }}</h5>
+
+                {% load filters %}
+                <h5>{{ event.start_time|format_date_range:event.end_time }}</h5>
+                <div class="mt-5 w-100">
+                    <h5 class="text-muted">Starts at {{ event.start_time|date:"F j, Y g:iA" }}</h5>
+                    <h5 class="text-muted">Ends at {{ event.end_time|date:"F j, Y g:iA" }}</h5>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <a
+                    class="harvestly-nav-btn-secondary mx-1 py-2 d-flex justify-content-center align-items-center"
+                    href="{% url 'event-detail' event.id %}"
+                >
+                    <h4 class="m-0">Cancel</h4>
+                </a>
+                    <button class="harvestly-nav-btn-danger mx-1 py-2 d-flex justify-content-center align-items-center" type="submit">
+                        <h4 class="m-0">
+                            <i class="bi-exclamation-diamond-fill"></i>
+                            Delete
+                        </h4>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    {% load static %}
+    <script>
+        let google_maps_api_key = "{{ google_maps_api_key|safe }}";
+        let latitude = {{ event.latitude }};
+        let longitude = {{ event.longitude }};
+    </script>
+    <script src="{% static 'js/googleMapsMap.js' %}"></script>
+</div>
+{% endblock %}

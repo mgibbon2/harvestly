@@ -1,0 +1,397 @@
+/* Configure CSS variables here */
+:root {
+    --pad: max(2em, 4vmin);
+    --content-pad: max(2em, 3vmin);
+    --navbar-pad: max(1em, 3vmin);
+    --footer-pad: 30vw;
+    --splash-pic-size: max(45vw, 290px);
+    --logo-size: max(32px, 8vmin);
+
+    --title-size: max(2.5em, 8vmin);
+    --subtitle-size: max(1.5em, 4.5vmin);
+    --form-label-size: max(1.2em, 2.5vmin);
+    --form-input-size: max(0.7em, 1.8vmin);
+
+    --primary-color: rgb(121,155,65);
+    --primary-color-hover: #939b62;
+    --secondary-color: rgb(145, 123, 12);
+    --secondary-color-hover: rgb(145, 123, 12);
+    --danger-color: rgb(154, 68, 68);
+    --warning-color: rgb(222, 143, 95);
+    --info-color: rgb(129, 202, 207);
+    --light-color: rgb(245, 247, 248);
+    --dark-color: rgb(0, 21, 42);
+    --brand-color: rgb(57, 149, 71);
+    --primary-color-transparent: rgba(121,155,65,0.5);
+    --dark-color-transparent: rgba(0, 21, 42, 0.5);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+}
+
+main {
+    padding: 0 var(--pad) 6rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 72vh;
+}
+
+footer {
+    margin-top: auto;
+    padding: 1rem var(--footer-pad);
+    background-color: var(--dark-color);
+}
+footer .row {
+    margin: 0.2rem 1rem;
+    justify-content: center;
+}
+footer .col {
+    margin-top: 1em;
+}
+footer .harvestly-nav-link {
+    white-space: nowrap;
+    color: white !important;
+}
+
+.harvestly-navbar {
+    padding: 1rem var(--pad);
+    margin-bottom: var(--navbar-pad);
+}
+
+.harvestly-nav .harvestly-nav-link {
+    margin-left: 1em;
+}
+.harvestly-nav-link {
+    text-decoration: none !important;
+    color: var(--dark-color) !important;
+
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    filter: opacity(0.8);
+    font-size: large;
+    text-align: center;
+
+    transition: all 0.3s ease;
+}
+.harvestly-nav-link::before {
+    content: '';
+    background-color: var(--primary-color);
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: all 0.3s ease;
+}
+.harvestly-nav-link:hover {
+    filter: opacity(1);
+    color: var(--primary-color) !important;
+}
+.harvestly-nav-link:hover::before {
+      transform: scaleX(1);
+}
+
+.harvestly-nav-btn-primary {
+    text-decoration: none !important;
+    color: var(--light-color);
+
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    font-size: large;
+    text-align: center;
+
+    min-height: 40px;
+    min-width: 120px;
+
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    background-color: var(--primary-color);
+
+    transition: all 0.3s ease;
+}
+.harvestly-nav-btn-primary:hover {
+    color: var(--light-color) !important;
+    background-color: var(--primary-color-hover);
+}
+.harvestly-nav-btn-primary:focus {
+    color: var(--light-color) !important;
+    border: 5px solid var(--primary-color-hover);
+}
+.harvestly-nav-btn-primary:active {
+    color: var(--light-color) !important;
+    background-color: var(--primary-color-hover);
+    border: 5px solid var(--primary-color);
+}
+
+.harvestly-nav-btn-secondary {
+    text-decoration: none !important;
+    color: var(--secondary-color);
+
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    font-size: large;
+    text-align: center;
+
+    min-height: 40px;
+    min-width: 120px;
+
+    border: 2px solid var(--secondary-color);
+    border-radius: 5px;
+    background-color: var(--plight-color);
+
+    transition: all 0.3s ease;
+}
+.harvestly-nav-btn-secondary:hover {
+    color: var(--light-color) !important;
+    background-color: var(--secondary-color-hover);
+}
+.harvestly-nav-btn-secondary:focus {
+    border: 5px solid var(--dark-color);
+}
+.harvestly-nav-btn-secondary:active {
+    color: var(--light-color) !important;
+    background-color: var(--secondary-color-hover);
+    border: 5px solid var(--dark-color);
+}
+
+.harvestly-nav-btn-danger {
+    text-decoration: none !important;
+    color: var(--danger-color);
+
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    font-size: large;
+    text-align: center;
+
+    min-height: 40px;
+    min-width: 120px;
+
+    border: 2px solid var(--danger-color);
+    border-radius: 5px;
+    background-color: transparent;
+
+    transition: all 0.3s ease;
+}
+.harvestly-nav-btn-danger:hover {
+    color: var(--light-color) !important;
+    background-color: var(--danger-color);
+}
+.harvestly-nav-btn-danger:focus {
+    color: var(--light-color) !important;
+    border: 5px solid var(--dark-color);
+}
+.harvestly-nav-btn-danger:active {
+    color: var(--light-color) !important;
+    background-color: var(--warning-color);
+    border: 5px solid var(--dark-color);
+}
+
+.title {
+    font-size: var(--title-size) !important;
+    color: var(--dark-color);
+}
+.subtitle {
+    font-size: var(--subtitle-size) !important;
+    color: var(--primary-color);
+}
+
+.splash-pic {
+    border-radius: 5px;
+    width: var(--splash-pic-size);
+    height: auto;
+}
+
+.content {
+    margin: 0 var(--content-pad);
+}
+
+.home-navbar-brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.8rem 0 0.3rem;
+}
+.home-logo {
+    width: var(--logo-size);
+    height: auto;
+    filter: brightness(85%) !important;
+}
+.home-text {
+    padding: 0;
+    margin: 0;
+    color: var(--dark-color);
+    filter: opacity(0.7);
+    transition: all ease 0.3s;
+}
+.home-text::before {
+    content: '';
+    background-color: var(--dark-color);
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: all 0.3s ease;
+}
+.home-navbar-brand:hover .home-text {
+    filter: opacity(1);
+}
+.home-navbar-brand:hover .home-text::before {
+    transform: scaleX(1);
+}
+
+.harvestly-form-item {
+    font-size: var(--form-label-size);
+    color: var(--dark-color)
+}
+.harvestly-form-item input,
+.harvestly-form-item textarea {
+    font-size: var(--form-input-size);
+    padding: 0.5rem 1rem;
+    width: 100%;
+    border-color: var(--dark-color);
+    border-width: 2px;
+    border-radius: 5px;
+}
+.harvestly-form-item textarea {
+    height: 100%;
+}
+
+.harvestly-card-link,
+.harvestly-card-link:hover {
+    text-decoration: none;
+}
+.harvestly-card-link .card-body {
+    background-color: rgba(0,0,0,0.1);
+    color: var(--dark-color);
+    transition: all 0.3s ease-in-out;
+}
+.harvestly-card-link:hover .card-body {
+    color: white;
+    background: var(--primary-color);
+} 
+.harvestly-card-link .card-body h5 {
+    opacity: 0.7;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.harvestly-card-link:hover .card-body h5 {
+    opacity: 1;
+}
+.harvestly-card-link .card {
+    background-color: rgba(0,0,0,0.1);
+    border-width: 2px;
+    transition: all 0.3s ease-in-out;
+}
+.harvestly-card-link:hover .card {
+    border-color: var(--primary-color);
+}
+
+
+.harvestly-scrollable-container {
+    margin: 2rem 0;
+    padding: 1rem 0.5rem;
+    display: flex;
+    border-radius: 10px;
+    border: solid var(--dark-color) 2px;
+    height: max(300px, 30vh);
+}
+.harvestly-scrollable-content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    overflow-y: auto;
+}
+.harvestly-scrollable-content::-webkit-scrollbar {
+    width: 10px;
+	background-color: white;
+}
+.harvestly-scrollable-content::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+    border: 3px solid white;
+    background-color: var(--dark-color-transparent);
+    cursor: pointer;
+}
+.harvestly-scrollable-item {
+    text-decoration: none !important;
+    color: var(--dark-color) !important;
+    border-radius: 10px;
+    width: 100%;
+    height: fit-content;
+    cursor: pointer;
+    display: flex;
+    padding: 1.5rem 1rem;
+    margin: 0.5rem 0.3rem;
+    background-color: transparent;
+    transition: background-color ease 0.3s;
+}
+.harvestly-scrollable-item.selected-event,
+.harvestly-scrollable-item:hover {
+    background-color: var(--primary-color-transparent);
+}
+
+.harvestly-product-card-img-container {
+    display: flex;
+    justify-content: center;
+    height: 30vh;
+    overflow: hidden;
+}
+.harvestly-product-card-img {
+    object-fit: cover;
+}
+.harvestly-product-img { 
+    max-width: 40vw;
+    max-height: 70vh;
+}
+
+.harvestly-form-errors {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.harvestly-form-error {
+    margin: 0 0 1rem;
+    padding: 0.5rem 1rem;
+    border: solid 2px var(--danger-color);
+    border-radius: 10px;
+    color: var(--danger-color);
+}
+
+
+.harvestly-map-display {
+    width: 100% !important;
+    height: max(500px, 20vh) !important;
+    font-weight: 400;
+}
+
+.text-danger {
+    color: var(--danger-color) !important;
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --footer-pad: 0;
+    }
+
+    .harvestly-form-item textarea {
+        height: auto;
+    }
+
+    .harvestly-map-display {
+        margin-bottom: 2rem;
+    }
+}

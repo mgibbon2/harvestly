@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+{% block title %}{{ event.name|title }} Details{% endblock %}
+
+{% block content %}
+<div>
+    <h3 class="subtitle">{{ event.name|title }}</h3>
+    <div class="row mt-4 mb-5">
+        <div class="col-md-6 mb-2">
+            <!-- Google Maps Display -->
+            <div class="rounded harvestly-map-display" id="harvestly-map"></div>
+        </div>
+        <div class="col-md-6 align-self-center">
+            <h3>{{ event.name|title }} Details</h3>
+            <h5>{{ event.location }}</h5>
+
+            {% load filters %}
+            <h5>{{ event.start_time|format_date_range:event.end_time }}</h5>
+            <div class="mt-5 w-100">
+                <h5 class="text-muted">Starts at {{ event.start_time|date:"F j, Y g:iA" }}</h5>
+                <h5 class="text-muted">Ends at {{ event.end_time|date:"F j, Y g:iA" }}</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 pt-4">
+        <div class="col-md-6 d-flex flex-column">
+            <h3>Market Organizer Information</h3>
+            <h5>{{ event.organizer.username|title }}</h5>
+
+            <!-- TODO develop this as we build out user profile -->
+            <p class="text-muted mt-3">More vendor information coming soon.</p>
+        </div>
+        <div class="col-md-6 d-flex flex-column">
+            <div class="row">
+                {% if user.is_authenticated and user.id == event.organizer.id %}
+                    <div class="col-lg-6">
+                        <h3>Products for this Market</h3>
+                    </div>
+                    <div class="col-lg-6 d-flex justify-content-end">
+                        <a 
+                            href="{% url 'product-create-with-event' event.id %}"
+                            class="harvestly-nav-btn-primary px-2 d-flex align-items-center justify-content-center"
+                        >
+                            <h5 class="m-0">Add Product</h5>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="col">
+                        <h3>Products for this Market</h3>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="harvestly-scrollable-container">
+                <div class="harvestly-scrollable-content">
+                    {% if event.get_products %}
+                        {% for product in event.get_products %}
+                            <a 
+                                class="harvestly-scrollable-item flex-column"
+                                href="{% url 'product-details' product.id %}"
+                            >
+                                <h4 class="mb-4">{{ product.name|title }}</h4>
+                                <!-- TODO Placeholder value for the product's creator -->
+                                <h5 class="mb-2">For sale by {{ product.owner.username|title }}</h5>
+                                <div class="d-flex justify-content-between text-muted">
+                                    <h5>${{ product.price|floatformat:"2" }}</h5>
+                                    <h5 class="m-0">&times;{{ product.quantity }}</h5>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <div class="d-flex align-items-center justify-content-center">
+                            <h4 class="text-muted">No available products.</h4>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if user.is_authenticated and user.id == event.organizer.id %}
+        <div class="row mt-5 pt-4 justify-content-end">
+            <div class="col-md-6 d-flex justify-content-end align-self-center">
+                <a
+                href="{% url 'event-delete' event.id %}"
+                class="harvestly-nav-btn-danger  d-flex justify-content-center align-items-center mx-1 py-2"
+            >
+                <h4 class="m-0">
+                    <i class="bi-exclamation-diamond-fill"></i>
+                    Delete
+                </h4>
+            </a>
+                <a 
+                    href="{% url 'event-update' event.id %}" 
+                    class="harvestly-nav-btn-primary d-flex justify-content-center align-items-center mx-1 py-2"
+                >
+                    <h4 class="m-0">Edit</h4>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
+    {% load static %}
+    <script>
+        let google_maps_api_key = "{{ google_maps_api_key|safe }}";
+        let latitude = {{ event.latitude }};
+        let longitude = {{ event.longitude }};
+    </script>
+    <script src="{% static 'js/googleMapsMap.js' %}"></script>
+</div>
+{% endblock %}

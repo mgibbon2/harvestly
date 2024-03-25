@@ -1,0 +1,15 @@
+db.sqlite3
+__pycache__/
+
+.env
+
+.replit
+replit.nix
+venv/
+**/migrations/
+
+**/media/
+
+**/htmlcov/
+**/.coverage
+.vscode/ 
